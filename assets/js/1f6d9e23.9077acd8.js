@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkrae_docs=self.webpackChunkrae_docs||[]).push([[4811],{2811:a=>{a.exports=JSON.parse('{"label":"hola","permalink":"/RAE-docs/blog/tags/hola","allTagsPath":"/RAE-docs/blog/tags","count":1}')}}]);
