@@ -9,7 +9,7 @@ const config = {
   title: 'Raccoon AI Engine',
   tagline: 'AI for Everyone',
   url: 'https://raccoon-ai.com',
-  baseUrl: '/RAE-docs',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
