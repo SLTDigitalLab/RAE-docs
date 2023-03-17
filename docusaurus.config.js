@@ -8,8 +8,8 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Raccoon AI Engine',
   tagline: 'AI for Everyone',
-  url: 'https://raccoon-ai.com',
-  baseUrl: '/',
+  url: 'https://raccoon-ai.io',
+  baseUrl: '',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
