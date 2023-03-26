@@ -6,10 +6,10 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Raccoon AI Engine',
+  title: 'Raccoon AI',
   tagline: 'AI for Everyone',
-  url: 'https://raccoon-ai.com',
-  baseUrl: '/RAE-docs',
+  url: 'https://raccoon-ai.io',
+  baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
@@ -59,7 +59,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: 'Raccoon AI Engine',
+        title: 'Raccoon AI',
         logo: {
           alt: 'Raccoon AI',
           src: 'img/logo.svg',
@@ -124,12 +124,12 @@ const config = {
               },
               {
                 label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
+                href: 'https://github.com/SLTDigitalLab',
               },
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} SLT Digital Lab. Built with Docusaurus.`,
       },
       prism: {
         theme: lightCodeTheme,

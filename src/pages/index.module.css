@@ -8,6 +8,7 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  font-family: Futura, Trebuchet MS, Arial, sans-serif;
 }
 
 @media screen and (max-width: 996px) {
