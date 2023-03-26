@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://raccoon-ai.io/blog</id>
-    <title>Raccoon AI Engine Blog</title>
+    <title>Raccoon AI Blog</title>
     <updated>2021-08-26T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://raccoon-ai.io/blog"/>
-    <subtitle>Raccoon AI Engine Blog</subtitle>
+    <subtitle>Raccoon AI Blog</subtitle>
     <icon>https://raccoon-ai.io/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[Welcome]]></title>

@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkrae_docs=self.webpackChunkrae_docs||[]).push([[4474],{6185:t=>{t.exports=JSON.parse('{"title":"Introduction","description":"Get stated with Raccoon AI Engine","slug":"/category/introduction","permalink":"/docs/category/introduction","navigation":{"next":{"title":"Getting Started","permalink":"/docs/getting-started/"}}}')}}]);
