@@ -1,0 +1,160 @@
+---
+sidebar_position: 3
+---
+
+# Theta
+
+ARIMA (AutoRegressive Integrated Moving Average) is a popular time series forecasting model that combines autoregressive (AR), differencing (I), and moving average (MA) components to capture the patterns and dependencies in time series data. It is widely used for analyzing and forecasting time-dependent data points.
+
+The ARIMA model is suitable for stationary time series data, where the statistical properties such as mean and variance remain constant over time. If the data is non-stationary, differencing can be applied to make it stationary by removing trends or seasonality.
+
+<Tooltip color="#3abe25">Method: POST</Tooltip> <Tooltip color="#Be2525">
+  Authorization: API Key
+</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+https://engine.raccoon-ai.io/api/v1/ml/time-series/arima
+```
+
+## Authorization
+
+| Type    | Key       | Value       |
+| ------- | --------- | ----------- |
+| API Key | X-Api-Key | rae\_###### |
+
+## Request Body
+
+| Section | Key         | Data Type | Required | Description                           |
+| ------- | ----------- | --------- | -------- | ------------------------------------- |
+| train   | data        | json      | true     | Data that use to train the model      |
+|         | date_col    | string    | true     | Input features (X)                    |
+|         | target_col  | string    | true     | Output targets (y)                    |
+| config  | freq        | string    | false    | Gap between datas/ time               |
+|         | test_size   | float     | false    | Test size for split data              |
+| forcast | forcast_for | int       | true     | Number of points that need to forcast |
+
+### Types
+
+```json
+{
+  "train": {
+    "data": <json>,
+    "dates_col": <string>,
+    "target_col": <string>
+  },
+  "config": {
+    "freq": <string>,
+    "test_size": <float>
+  },
+  "forcast_for": <int>
+}
+```
+
+### Sample
+
+```json
+{
+  "train": {
+    "data": {
+      "dates": {
+        "0": "2022-11-25",
+        "1": "2022-12-02",
+        "2": "2022-12-09",
+        "3": "2022-12-16",
+        "4": "2022-12-23",
+        "5": "2022-12-30",
+        "6": "2023-01-06",
+        "7": "2023-01-13",
+        "8": "2023-01-20",
+        "9": "2023-01-27"
+      },
+      "marks": {
+        "0": 161,
+        "1": 123,
+        "2": 134,
+        "3": 167,
+        "4": 143,
+        "5": 156,
+        "6": 167,
+        "7": 143,
+        "8": 156,
+        "9": 167
+      }
+    },
+    "dates_col": "dates",
+    "target_col": "marks"
+  },
+  "config": {
+    "freq": "W",
+    "test_size": 0.25
+  },
+  "forcast_for": 5
+}
+```
+
+## Reponse Body
+
+| Key          | Data Type | Description                                                               |
+| ------------ | --------- | ------------------------------------------------------------------------- |
+| success      | boolean   | Indicate the success of the request                                       |
+| msg          | string    | Message indicators                                                        |
+| error        | string    | Error information, only set if success is false                           |
+| result       | json      | Result, only set if success is true                                       |
+| score        | json      | r2_scores of the training and testing phases, only set if success is true |
+| generated_ts | float     | Generated timestamp                                                       |
+
+### Types
+
+```json
+{
+  "success": <boolean>,
+  "msg": <string | null>,
+  "error": <string | null>,
+  "result": <list>,
+  "score": {
+    "rmse": <float>
+  },
+  "generated_ts": <timestamp>
+}
+```
+
+### Sample
+
+```json
+{
+  "success": true,
+  "msg": "Model trained and predicted successfully",
+  "error": null,
+  "result": [
+    145.306460384454, 159.01596373700463, 165.26655276778865,
+    144.69950483108218, 160.2060306291415
+  ],
+  "score": {
+    "rmse": 14.027130973766175
+  },
+  "saved_in": null,
+  "generated_ts": 1685514898.064395
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);
