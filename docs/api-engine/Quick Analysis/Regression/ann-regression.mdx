@@ -1,0 +1,253 @@
+---
+sidebar_position: 2
+---
+
+# Artificial Neural Network Regression
+
+Artificial Neural Network (ANN) regression is a technique used in machine learning to solve regression problems. Regression refers to the task of predicting a continuous numerical value, such as predicting house prices, stock prices, or the age of a person based on certain input variables or features.
+
+ANNs are computational models inspired by the structure and function of the human brain. They consist of interconnected nodes, or artificial neurons, organized into layers. The three main types of layers in an ANN are the input layer, hidden layers, and output layer.
+
+<Tooltip color="green">POST</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+https://engine.raccoon-ai.io/api/v1/ml/regression/ann
+```
+
+## Authorization
+
+| Type    | Key       | Value       |
+| ------- | --------- | ----------- |
+| API Key | X-Api-Key | rae\_###### |
+
+## Request Body
+
+| Section | Key      | Data Type | Required | Description                                      |
+| ------- | -------- | --------- | -------- | ------------------------------------------------ |
+| train   | data     | json      | true     | Data that use to train the model                 |
+|         | features | list      | true     | Input features (X)                               |
+|         | targets  | list      | true     | Output targets (y)                               |
+|         | config   | json      | false    | Train configurations                             |
+| predict | data     | json      | true     | Data that need to predicted by the trained model |
+|         | config   | json      | false    | Predict configurations                           |
+
+### Data Types
+
+```json
+{
+    "train"   : {
+        "data"    : <json_data>,
+        "features": <list>,
+        "targets" : <list>,
+        "config"  : {
+                "std_scale": <boolean>,
+                "encoder"  : <"onehot" | "label" | "drop">
+            }
+    },
+    "predict": {
+        "data": <json_data>,
+        "config": {
+          "encoder": <"onehot" | "label" | "drop">,
+          "std_scale": boolean,
+          "hidden_units": list,
+          "max_iter": int
+        }
+    }
+}
+```
+
+### Sample
+
+```json
+{
+  "train": {
+    "data": {
+      "R&D Spend": {
+        "0": 165349.2,
+        "1": 162597.7,
+        "2": 153441.51,
+        "3": 144372.41,
+        "4": 142107.34,
+        "5": 131876.9,
+        "6": 134615.46,
+        "7": 130298.13,
+        "8": 120542.52,
+        "9": 123334.88
+      },
+      "Administration": {
+        "0": 136897.8,
+        "1": 151377.59,
+        "2": 101145.55,
+        "3": 118671.85,
+        "4": 91391.77,
+        "5": 99814.71,
+        "6": 147198.87,
+        "7": 145530.06,
+        "8": 148718.95,
+        "9": 108679.17
+      },
+      "Marketing Spend": {
+        "0": 471784.1,
+        "1": 443898.53,
+        "2": 407934.54,
+        "3": 383199.62,
+        "4": 366168.42,
+        "5": 362861.36,
+        "6": 127716.82,
+        "7": 323876.68,
+        "8": 311613.29,
+        "9": 304981.62
+      },
+      "State": {
+        "0": "New York",
+        "1": "California",
+        "2": "Florida",
+        "3": "New York",
+        "4": "Florida",
+        "5": "New York",
+        "6": "California",
+        "7": "Florida",
+        "8": "New York",
+        "9": "California"
+      },
+      "Profit": {
+        "0": 192261.83,
+        "1": 191792.06,
+        "2": 191050.39,
+        "3": 182901.99,
+        "4": 166187.94,
+        "5": 156991.12,
+        "6": 156122.51,
+        "7": 155752.6,
+        "8": 152211.77,
+        "9": 149759.96
+      }
+    },
+    "features": ["R&D Spend", "Administration", "Marketing Spend", "State"],
+    "targets": ["Profit"],
+    "config": {
+      "encoder": "onehot",
+      "std_scale": true,
+      "hidden_units": [100, 100],
+      "max_iter": 1000
+    }
+  },
+  "predict": {
+    "data": {
+      "R&D Spend": {
+        "0": 165349.2,
+        "1": 162597.7
+      },
+      "Administration": {
+        "0": 136897.8,
+        "1": 151377.59
+      },
+      "Marketing Spend": {
+        "0": 471784.1,
+        "1": 443898.53
+      },
+      "State": {
+        "0": "New York",
+        "1": "California"
+      }
+    },
+    "config": {
+      "include_inputs": true,
+      "round": 2
+    }
+  }
+}
+```
+
+### Train config
+
+```
+
+```
+
+## Reponse Body
+
+| Key          | Data Type | Description                                                               |
+| ------------ | --------- | ------------------------------------------------------------------------- |
+| success      | boolean   | Indicate the success of the request                                       |
+| msg          | string    | Message indicators                                                        |
+| error        | string    | Error information, only set if success is false                           |
+| result       | json      | result, only set if success is true                                       |
+| score        | json      | r2_scores of the training and testing phases, only set if success is true |
+| generated_ts | float     | generated timestamp                                                       |
+
+### Data Types
+
+```json
+{
+    "success": <boolean>,
+    "msg": <string>,
+    "error": <string>,
+    "result": <json>,
+    "score": {
+        "train": <float>,
+        "test": <float>
+    },
+    "generated_ts": <timestamp>
+}
+```
+
+### Sample
+
+```json
+{
+  "success": true,
+  "msg": "Model trained and predicted successfully",
+  "error": null,
+  "result": {
+    "R&D Spend": {
+      "0": 165349.2,
+      "1": 162597.7
+    },
+    "Administration": {
+      "0": 136897.8,
+      "1": 151377.59
+    },
+    "Marketing Spend": {
+      "0": 471784.1,
+      "1": 443898.53
+    },
+    "State": {
+      "0": "New York",
+      "1": "California"
+    },
+    "Profit": {
+      "0": 190209.72,
+      "1": 186863.18
+    }
+  },
+  "score": {
+    "train": 0.942446542689397,
+    "test": 0.9649618042060305
+  },
+  "saved_in": null,
+  "generated_ts": 1685439220.425382
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);
