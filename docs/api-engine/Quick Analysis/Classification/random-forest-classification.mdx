@@ -1,0 +1,241 @@
+---
+sidebar_position: 3
+---
+
+# Random Forest Classification
+
+Random Forest is a popular ensemble machine learning algorithm used for classification tasks. It is based on the concept of decision trees and combines the predictions of multiple decision trees to make a final classification decision. Random Forest is known for its robustness, accuracy, and ability to handle high-dimensional data.
+
+<Tooltip color="green">POST</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+https://engine.raccoon-ai.io/api/v1/ml/classification/randomforest
+```
+
+## Authorization
+
+| Type    | Key       | Value       |
+| ------- | --------- | ----------- |
+| API Key | X-Api-Key | rae\_###### |
+
+## Request Body
+
+| Section | Key      | Data Type | Required | Description                                      |
+| ------- | -------- | --------- | -------- | ------------------------------------------------ |
+| train   | data     | json      | true     | Data that use to train the model                 |
+|         | features | list      | true     | Input features (X)                               |
+|         | targets  | list      | true     | Output targets (y)                               |
+|         | config   | json      | false    | Train configurations                             |
+| predict | data     | json      | true     | Data that need to predicted by the trained model |
+|         | config   | json      | false    | Predict configurations                           |
+
+### Types
+
+```json
+{
+    "train"   : {
+        "data"    : <json_data>,
+        "features": <list>,
+        "targets" : <list>,
+        "config"  : {
+                "std_scale": <boolean>,
+                "encoder"  : <"label" | "drop">
+            }
+    },
+    "predict": {
+        "data": <json_data>,
+        "config": {
+            "include_inputs": <boolean>,
+            "round": <int>
+        }
+    }
+}
+```
+
+### Sample
+
+```json
+{
+  "train": {
+    "data": {
+      "R&D Spend": {
+        "0": 165349.2,
+        "1": 162597.7,
+        "2": 153441.51,
+        "3": 144372.41,
+        "4": 142107.34,
+        "5": 131876.9,
+        "6": 134615.46,
+        "7": 130298.13,
+        "8": 120542.52,
+        "9": 123334.88
+      },
+      "Administration": {
+        "0": 136897.8,
+        "1": 151377.59,
+        "2": 101145.55,
+        "3": 118671.85,
+        "4": 91391.77,
+        "5": 99814.71,
+        "6": 147198.87,
+        "7": 145530.06,
+        "8": 148718.95,
+        "9": 108679.17
+      },
+      "Marketing Spend": {
+        "0": 471784.1,
+        "1": 443898.53,
+        "2": 407934.54,
+        "3": 383199.62,
+        "4": 366168.42,
+        "5": 362861.36,
+        "6": 127716.82,
+        "7": 323876.68,
+        "8": 311613.29,
+        "9": 304981.62
+      },
+      "State": {
+        "0": "New York",
+        "1": "California",
+        "2": "Florida",
+        "3": "New York",
+        "4": "Florida",
+        "5": "New York",
+        "6": "California",
+        "7": "Florida",
+        "8": "New York",
+        "9": "California"
+      },
+      "Profit": {
+        "0": 192261.83,
+        "1": 191792.06,
+        "2": 191050.39,
+        "3": 182901.99,
+        "4": 166187.94,
+        "5": 156991.12,
+        "6": 156122.51,
+        "7": 155752.6,
+        "8": 152211.77,
+        "9": 149759.96
+      }
+    },
+    "features": ["R&D Spend", "Administration", "Marketing Spend", "Profit"],
+    "targets": ["State"],
+    "config": {
+      "std_scale": true,
+      "encoder": "label"
+    }
+  },
+  "predict": {
+    "data": {
+      "R&D Spend": {
+        "0": 165349.2,
+        "1": 162597.7
+      },
+      "Administration": {
+        "0": 136897.8,
+        "1": 151377.59
+      },
+      "Marketing Spend": {
+        "0": 471784.1,
+        "1": 443898.53
+      },
+      "Profit": {
+        "0": 471784.1,
+        "1": 443898.53
+      }
+    },
+    "config": {
+      "include_inputs": true,
+      "round": 2
+    }
+  }
+}
+```
+
+## Reponse Body
+
+| Key          | Data Type | Description                                                                     |
+| ------------ | --------- | ------------------------------------------------------------------------------- |
+| success      | boolean   | Indicate the success of the request                                             |
+| msg          | string    | Message indicators                                                              |
+| error        | string    | Error information, only set if success is false                                 |
+| result       | json      | Result, only set if success is true                                             |
+| score        | json      | Accuracy scores of the training and testing phases, only set if success is true |
+| generated_ts | float     | Generated timestamp                                                             |
+
+### Types
+
+```json
+{
+    "success": <boolean>,
+    "msg": <string>,
+    "error": <string>,
+    "result": <json>,
+    "score": {
+        "train": <float>,
+        "test": <float>
+    },
+    "generated_ts": <timestamp>
+}
+```
+
+### Sample
+
+```json
+{
+  "success": true,
+  "msg": "Model trained and predicted successfully",
+  "error": null,
+  "result": {
+    "R&D Spend": {
+      "0": 165349.2,
+      "1": 162597.7
+    },
+    "Administration": {
+      "0": 136897.8,
+      "1": 151377.59
+    },
+    "Marketing Spend": {
+      "0": 471784.1,
+      "1": 443898.53
+    },
+    "Profit": {
+      "0": 190209.72,
+      "1": 186863.18
+    },
+    "State": {
+      "0": "New York",
+      "1": "California"
+    }
+  },
+  "score": {
+    "train": 0.942446542689397,
+    "test": 0.9649618042060305
+  },
+  "saved_in": null,
+  "generated_ts": 1685439220.425382
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);
