@@ -1,0 +1,8 @@
+{
+  "label": "ML Quick Analysis",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Analys your data without saving anything on the cloud quickly."
+  }
+}
