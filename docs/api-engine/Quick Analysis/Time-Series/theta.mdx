@@ -4,9 +4,11 @@ sidebar_position: 3
 
 # Theta
 
-ARIMA (AutoRegressive Integrated Moving Average) is a popular time series forecasting model that combines autoregressive (AR), differencing (I), and moving average (MA) components to capture the patterns and dependencies in time series data. It is widely used for analyzing and forecasting time-dependent data points.
+The Theta model is a forecasting technique that combines a simple exponential smoothing approach with a linear trend component. It is useful for forecasting time series data that exhibits a linear trend.
 
-The ARIMA model is suitable for stationary time series data, where the statistical properties such as mean and variance remain constant over time. If the data is non-stationary, differencing can be applied to make it stationary by removing trends or seasonality.
+The Theta model is based on the assumption that the future values of a time series can be estimated by applying exponential smoothing to the linearly detrended data. It is named after the Greek letter theta (θ), which represents the slope of the trend line.
+
+**The Theta model provides a simple and straightforward approach to forecasting time series data with a linear trend. However, it assumes that the trend remains linear over the forecasted period and may not capture more complex trend patterns. Additionally, it may not perform well for time series with irregular or nonlinear trends.**
 
 <Tooltip color="#3abe25">Method: POST</Tooltip> <Tooltip color="#Be2525">
   Authorization: API Key
@@ -14,7 +16,7 @@ The ARIMA model is suitable for stationary time series data, where the statistic
 <div style={{ marginBottom: "20px" }}></div>
 
 ```bash
-https://engine.raccoon-ai.io/api/v1/ml/time-series/arima
+https://engine.raccoon-ai.io/api/v1/ml/time-series/theta
 ```
 
 ## Authorization
@@ -133,7 +135,6 @@ https://engine.raccoon-ai.io/api/v1/ml/time-series/arima
   "score": {
     "rmse": 14.027130973766175
   },
-  "saved_in": null,
   "generated_ts": 1685514898.064395
 }
 ```

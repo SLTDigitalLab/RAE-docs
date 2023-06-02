@@ -1,0 +1,98 @@
+---
+sidebar_position: 3
+---
+
+# Get All Projects
+
+Get all the projects that you have access.
+
+<Tooltip color="#3abe25">Method: GET</Tooltip> <Tooltip color="#Be2525">
+  Authorization: JWT
+</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+localhost:8000/api/v1/projects/get-all
+```
+
+## Authorization
+
+| Type | Key           | Value             |
+| ---- | ------------- | ----------------- |
+| JWT  | Authorization | Bearer ########## |
+
+## Reponse Body
+
+| Key        | Data Type | Description                                          |
+| ---------- | --------- | ---------------------------------------------------- |
+| success    | boolean   | Indicate the success of the request                  |
+| msg        | string    | Message indicators                                   |
+| error_code | int       | Error code information, only set if success is false |
+| result     | json      | Result, only set if success is true                  |
+| gen_at     | datetime  | Generated datetime                                   |
+
+### Types
+
+```json
+{
+  "success": <boolean>,
+  "msg": <string>,
+  "error_code": <int>,
+  "result": <json>,
+  "gen_at": <datetime>
+}
+```
+
+### Sample
+
+```json
+{
+  "success": true,
+  "msg": "Projects fetched",
+  "error_code": null,
+  "result": [
+    {
+      "id": "MyProject",
+      "name": "MyProject",
+      "description": "This is my project",
+      "is_private": true,
+      "user_id": "7f7c0c39-0930-43f2-81a3-29e3cffecaa4",
+      "algo_type": "Regression",
+      "algo_selected": "Multiple Linear Regression",
+      "shared_type": null,
+      "shared_with": null,
+      "dataset_name": null,
+      "model_path": null,
+      "model_type": null,
+      "encoder_path": null,
+      "encoder_type": null,
+      "community_model_url": null,
+      "created_at": "2023-06-01T11:44:39.798483",
+      "updated_at": "2023-06-01T11:44:39.798490",
+      "is_community_model": false
+    }
+  ],
+  "gen_at": "2023-06-01T11:59:02.058951"
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);

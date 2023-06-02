@@ -2,11 +2,11 @@
 sidebar_position: 2
 ---
 
-# ARIMA
+# Auto ARIMA
 
-ARIMA (AutoRegressive Integrated Moving Average) is a popular time series forecasting model that combines autoregressive (AR), differencing (I), and moving average (MA) components to capture the patterns and dependencies in time series data. It is widely used for analyzing and forecasting time-dependent data points.
+Auto ARIMA, short for Automated ARIMA, is a variation of the ARIMA model that automates the selection of the order parameters (p, d, q) for the ARIMA model. It uses a stepwise algorithm to automatically determine the optimal values for these parameters based on the characteristics of the time series data.
 
-The ARIMA model is suitable for stationary time series data, where the statistical properties such as mean and variance remain constant over time. If the data is non-stationary, differencing can be applied to make it stationary by removing trends or seasonality.
+The main advantage of Auto ARIMA is that it simplifies the process of selecting the ARIMA model order, which can be a complex and time-consuming task. Instead of manually analyzing the ACF and PACF plots and testing different combinations of orders, Auto ARIMA automates this process and provides a more efficient way of finding the best-fitting ARIMA model.
 
 <Tooltip color="#3abe25">Method: POST</Tooltip> <Tooltip color="#Be2525">
   Authorization: API Key
@@ -14,7 +14,7 @@ The ARIMA model is suitable for stationary time series data, where the statistic
 <div style={{ marginBottom: "20px" }}></div>
 
 ```bash
-https://engine.raccoon-ai.io/api/v1/ml/time-series/arima
+https://engine.raccoon-ai.io/api/v1/ml/time-series/auto-arima
 ```
 
 ## Authorization
@@ -133,7 +133,6 @@ https://engine.raccoon-ai.io/api/v1/ml/time-series/arima
   "score": {
     "rmse": 14.027130973766175
   },
-  "saved_in": null,
   "generated_ts": 1685514898.064395
 }
 ```

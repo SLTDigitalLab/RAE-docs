@@ -95,14 +95,14 @@ https://engine.raccoon-ai.io/api/v1/ml/time-series/arima
 
 ## Reponse Body
 
-| Key          | Data Type | Description                                                               |
-| ------------ | --------- | ------------------------------------------------------------------------- |
-| success      | boolean   | Indicate the success of the request                                       |
-| msg          | string    | Message indicators                                                        |
-| error        | string    | Error information, only set if success is false                           |
-| result       | json      | Result, only set if success is true                                       |
-| score        | json      | r2_scores of the training and testing phases, only set if success is true |
-| generated_ts | float     | Generated timestamp                                                       |
+| Key          | Data Type | Description                                                             |
+| ------------ | --------- | ----------------------------------------------------------------------- |
+| success      | boolean   | Indicate the success of the request                                     |
+| msg          | string    | Message indicators                                                      |
+| error        | string    | Error information, only set if success is false                         |
+| result       | json      | Result, only set if success is true                                     |
+| score        | json      | RMSE (Root Mean Square Error) of the model, only set if success is true |
+| generated_ts | float     | Generated timestamp                                                     |
 
 ### Types
 
@@ -133,7 +133,6 @@ https://engine.raccoon-ai.io/api/v1/ml/time-series/arima
   "score": {
     "rmse": 14.027130973766175
   },
-  "saved_in": null,
   "generated_ts": 1685514898.064395
 }
 ```

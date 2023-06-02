@@ -1,0 +1,127 @@
+---
+sidebar_position: 1
+---
+
+# Create Project
+
+Creating a project in Raccoon AI is a straightforward process that allows you to organize your machine learning endeavors. With just a few steps, you can set up a dedicated workspace for your work. By creating a project, you gain the ability to store and manage your trained models and weights securely. It enables easy access to your models and facilitates collaboration with other users. Raccoon AI's project feature helps you maintain organization and control over your machine learning projects from start to finish.
+
+<Tooltip color="#3abe25">Method: POST</Tooltip> <Tooltip color="#Be2525">
+  Authorization: JWT
+</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+https://engine.raccoon-ai.io/api/v1/projects/new
+```
+
+## Authorization
+
+| Type | Key           | Value             |
+| ---- | ------------- | ----------------- |
+| JWT  | Authorization | Bearer ########## |
+
+## Request Body
+
+| Key           | Data Type | Required | Description                                                           |
+| ------------- | --------- | -------- | --------------------------------------------------------------------- |
+| name          | string    | true     | Name of the project                                                   |
+| description   | string    | true     | Project description                                                   |
+| algo_type     | string    | true     | Algorithm type expecting to build the model (For user referance only) |
+| algo_selected | string    | true     | Algorithm that use to build the model (For user referance only)       |
+
+### Types
+
+```json
+{
+  "name": <string>,
+  "description": <string>,
+  "algo_type": <string>,
+  "algo_selected": <string>
+}
+```
+
+### Sample
+
+```json
+{
+  "name": "My Project",
+  "description": "This is my project",
+  "algo_type": "Regression",
+  "algo_selected": "Multiple Linear Regression"
+}
+```
+
+## Reponse Body
+
+| Key        | Data Type | Description                                          |
+| ---------- | --------- | ---------------------------------------------------- |
+| success    | boolean   | Indicate the success of the request                  |
+| msg        | string    | Message indicators                                   |
+| error_code | int       | Error code information, only set if success is false |
+| result     | json      | Result, only set if success is true                  |
+| gen_at     | datetime  | Generated datetime                                   |
+
+### Types
+
+```json
+{
+  "success": <boolean>,
+  "msg": <string>,
+  "error_code": <int>,
+  "result": <json>,
+  "gen_at": <datetime>
+}
+```
+
+### Sample
+
+```json
+{
+  "success": true,
+  "msg": "Project created successfully",
+  "error_code": null,
+  "result": {
+    "id": "MyProject",
+    "name": "MyProject",
+    "description": "This is my project",
+    "is_private": true,
+    "user_id": "7f7c0c39-0930-43f2-81a3-29e3cffecaa4",
+    "algo_type": "Regression",
+    "algo_selected": "Multiple Linear Regression",
+    "shared_type": null,
+    "shared_with": null,
+    "dataset_name": null,
+    "model_path": null,
+    "model_type": null,
+    "encoder_path": null,
+    "encoder_type": null,
+    "community_model_url": null,
+    "created_at": "2023-06-01T11:44:39.798483",
+    "updated_at": "2023-06-01T11:44:39.798490",
+    "is_community_model": false
+  },
+  "gen_at": "2023-06-01T11:44:40.196245"
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);
