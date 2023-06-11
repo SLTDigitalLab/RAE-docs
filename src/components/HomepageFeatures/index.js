@@ -8,8 +8,11 @@ const FeatureList = [
     png: require("@site/static/img/r1.png").default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Raccoon AI Engine is a Machine Learning as a Service (MLaaS) REST API
+        that makes it easy to build and deploy machine learning models. It
+        provides a simple, easy-to-use API interface that allows you to create
+        and train models without having to worry about the underlying
+        infrastructure.
       </>
     ),
   },
@@ -18,8 +21,11 @@ const FeatureList = [
     png: require("@site/static/img/r2.png").default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Raccoon AI Engine is a fully programmable MLaaS Rest API that allows you
+        to build and deploy machine learning models with your own favorite
+        progamming language. If you don't have progamming skill, still can use
+        <code>postman</code> or <code>`insomnia`</code> to train and build
+        models.
       </>
     ),
   },
@@ -28,8 +34,9 @@ const FeatureList = [
     png: require("@site/static/img/r3.png").default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        The Built-in Runtime is a feature of Raccoon AI Engine that allows
+        developers to run their models without having to worry about
+        infrastructure or maintenance.
       </>
     ),
   },
