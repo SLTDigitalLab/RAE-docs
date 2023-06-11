@@ -1,10 +1,12 @@
 ---
-sidebar_position: 2
+sidebar_position: 5
 ---
 
-# Naive Bayes Classification
+# Gradient Boosting Classification
 
-Naive Bayes is a classification algorithm based on Bayes' theorem with the assumption of independence between features. Despite its simplistic assumptions, Naive Bayes is a popular and effective algorithm for text classification tasks, such as spam filtering or sentiment analysis.
+Gradient boosting classification is a machine learning algorithm that uses a series of weak learners to create a strong classifier. The weak learners are trained sequentially, with each learner being trained to correct the errors made by the previous learners. This process is repeated until the desired level of accuracy is achieved.
+
+Gradient boosting classification is a powerful algorithm that can be used to solve a variety of classification problems. It is particularly well-suited for problems where the data is noisy or imbalanced. However, it can be computationally expensive to train, and it can be prone to overfitting.
 
 <Tooltip color="#3abe25">Method: POST</Tooltip> <Tooltip color="#Be2525">
   Authorization: API Key
@@ -12,7 +14,7 @@ Naive Bayes is a classification algorithm based on Bayes' theorem with the assum
 <div style={{ marginBottom: "20px" }}></div>
 
 ```bash
-https://engine.raccoon-ai.io/api/v1/ml/classification/naivebayes
+https://engine.raccoon-ai.io/api/v1/ml/classification/gradboost
 ```
 
 ## Authorization
@@ -215,7 +217,7 @@ https://engine.raccoon-ai.io/api/v1/ml/classification/naivebayes
   },
   "score": {
     "train": 0.942446542689397,
-    "test": 0.9649618042060305
+    "validation": 0.9649618042060305
   },
   "saved_in": null,
   "generated_ts": 1685439220.425382
