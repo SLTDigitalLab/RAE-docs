@@ -6,156 +6,53 @@ sidebar_position: 1
 
 This is the process of teaching a machine learning model to make accurate predictions by adjusting its parameters using labeled data. It involves optimizing a specific objective function and aims to create a model that generalizes well to new data.
 
-<Tooltip color="#3abe25">Method: POST</Tooltip> <Tooltip color="#Be2525">
-  Authorization: JWT
+<Tooltip color="#3abe25">Method: GET</Tooltip> <Tooltip color="#Be2525">
+  Authorization: No
 </Tooltip>
 <div style={{ marginBottom: "20px" }}></div>
 
 ```bash
-https://engine.raccoon-ai.io/api/v1/trainer/ml/new/<algo_type>/<algo_selected>
-```
-`<algo_type>` and  `<algo_selected>` references as below,
-
-| `<algo_type>`   |          `<algo_selected>`                                      |
-| --------------- | ----------------------------------------------------------------|
-| regression      | `ann` , `grad-boost`, `log-reg`, `multi-linear`, `random-forest`|
-| classification  | `ann`, `grad-boost`, `naive-bayes`, `random-forest`, `svm`      |
-
-
-
-## Authorization
-
-| Type | Key           | Value             |
-| ---- | ------------- | ----------------- |
-| JWT  | Authorization | Bearer ########## |
-
-## Request Body
-| Section    | Key      | Data Type | Required | Description                                      |
-| -----------| -------- | --------- | -------- | ------------------------------------------------ |
-| train      | data     | json      | true     | Data that use to train the model                 |
-|            | features | list      | true     | Input features (X)                               |
-|            | targets  | list      | true     | Output targets (y)                               |
-|            | config   | json      | false    | Train configurations                             |
-| project    |project_id| string    | true     | ID of the project                                |
-
-
-### Types
-
-```json
-{
-    "train": {
-        "data": <json>,
-        "features": <list>,
-        "targets": <list>,
-        "config": <list>,
-    "project_id": <string>
-}
-```
-
-### Sample
-
-```json
-{
-    "train": {
-        "data": {
-            "R&D Spend": {
-                "0": 165349.2,
-                "1": 162597.7,
-                "2": 153441.51,
-                "3": 144372.41,
-                "4": 142107.34,
-                "5": 131876.9,
-                "6": 134615.46,
-                "7": 130298.13,
-                "8": 120542.52,
-                "9": 123334.88
-            },
-            "Administration": {
-                "0": 136897.8,
-                "1": 151377.59,
-                "2": 101145.55,
-                "3": 118671.85,
-                "4": 91391.77,
-                "5": 99814.71,
-                "6": 147198.87,
-                "7": 145530.06,
-                "8": 148718.95,
-                "9": 108679.17
-            },
-            "Marketing Spend": {
-                "0": 471784.1,
-                "1": 443898.53,
-                "2": 407934.54,
-                "3": 383199.62,
-                "4": 366168.42,
-                "5": 362861.36,
-                "6": 127716.82,
-                "7": 323876.68,
-                "8": 311613.29,
-                "9": 304981.62
-            },
-            "State": {
-                "0": "New York",
-                "1": "California",
-                "2": "Florida",
-                "3": "New York",
-                "4": "Florida",
-                "5": "New York",
-                "6": "California",
-                "7": "Florida",
-                "8": "New York",
-                "9": "California"
-            },
-            "Profit": {
-                "0": 192261.83,
-                "1": 191792.06,
-                "2": 191050.39,
-                "3": 182901.99,
-                "4": 166187.94,
-                "5": 156991.12,
-                "6": 156122.51,
-                "7": 155752.6,
-                "8": 152211.77,
-                "9": 149759.96
-            }
-        },
-        "features": [
-            "R&D Spend",
-            "Administration",
-            "Marketing Spend",
-            "State"
-        ],
-        "targets": [
-            "Profit"
-        ],
-        "config": {
-            "std_scale": true,
-            "encoder": "onehot"
-        }
-    },
-    "project_id": "Project1-96507"
-}
+https://engine.raccoon-ai.io/api/v1/explore/ml/cached/get/<project_id>
 ```
 
 ## Reponse Body
 
-| Key        | Data Type | Description                                          |
-| ---------- | --------- | ---------------------------------------------------- |
-| success    | boolean   | Indicate the success of the request                  |
-| msg        | string    | Message indicators                                   |
-| error_code | int       | Error code information, only set if success is false |
-| result     | json      | Result, only set if success is true                  |
-| gen_at     | datetime  | Generated datetime                                   |
+| Key            | Data Type | Description                                 |
+| -------------- | --------- | ------------------------------------------- |
+| id             | string    | Project identification number               |
+| user_id        | string    | User identification number                  |
+| model_path     | string    | Saved path for the model                    |
+| features       | list      | Set of features                             |
+| targets        | list      | Set of targets                              |
+| algo_type      | string    | Algorithem type                             |
+| types_map      | json      | Types of the features selected              |
+| project_id     | string    | Unique project identiication number         |
+| train_accu     | float     | Accuracy of the trained model (between 0-1) |
+| dataset        | json      | The prediction dataset                      |
+| permanent_save | bool      | Indiacating whether permently saved or not  |
+| created_ts     | int       | Created time of the project                 |
+| updated_ts     | json      | If updated, updated time of the project     |
+| hyper_params   | json      | The hyper parameters used for the model     |
 
 ### Types
 
 ```json
 {
-  "success": <boolean>,
-  "msg": <string>,
-  "error_code": <int>,
-  "result": <json>,
-  "gen_at": <datetime>
+  "id": <string>,
+  "user_id": <string>,
+  "model_path":<string>,
+  "features": <list>,
+  "targets": <list>,
+  "algo_type": <string>,
+  "types_map": <json>,
+  "project_id": <string>,
+  "train_accu": <float>,
+  "test_accu": <float>,
+  "dataset": <string>,
+  "permanent_save": <bool>,
+  "created_ts": <datatime>,
+  "updated_ts": <datatime>,
+  "hyper_params": <json>
 }
 ```
 
@@ -163,45 +60,38 @@ https://engine.raccoon-ai.io/api/v1/trainer/ml/new/<algo_type>/<algo_selected>
 
 ```json
 {
-    "success": true,
-    "msg": "Model trained successfully",
-    "error_code": null,
-    "result": {
-        "score": {
-            "train": 0.942446542689397,
-            "test": 0.9649618042060305
-        },
-        "cached_in": {
-            "id": "1686023662.253265",
-            "user_id": "7f7c0c39-0930-43f2-81a3-29e3cffecaa4",
-            "model_path": "/home/Raccoon-AI-Engine/app/storage/cached/ml/Project1-96507/7f7c0c39-0930-43f2-81a3-29e3cffecaa4/1686023662.253265.jlb",
-            "features": [
-                "R&D Spend",
-                "Administration",
-                "Marketing Spend",
-                "State"
-            ],
-            "targets": [
-                "Profit"
-            ],
-            "algo_type": "Multiple Linear Regressor",
-            "types_map": {
-                "R&D Spend": "float64",
-                "Administration": "float64",
-                "Marketing Spend": "float64",
-                "State": "object",
-                "Profit": "float64"
-            },
-            "project_id": "Project1-96507",
-            "train_accu": 0.942446542689397,
-            "test_accu": 0.9649618042060305,
-            "dataset": null,
-            "permanent_save": false,
-            "created_ts": "2023-06-06T03:54:22.255924",
-            "updated_ts": "2023-06-06T03:54:22.255929"
-        }
+  "success": true,
+  "msg": "Model trained successfully",
+  "error_code": null,
+  "result": {
+    "score": {
+      "train": 0.942446542689397,
+      "test": 0.9649618042060305
     },
-    "gen_at": "2023-06-06T03:54:22.609745"
+    "cached_in": {
+      "id": "1686023662.253265",
+      "user_id": "7f7c0c39-0930-43f2-81a3-29e3cffecaa4",
+      "model_path": "/home/Raccoon-AI-Engine/app/storage/cached/ml/Project1-96507/7f7c0c39-0930-43f2-81a3-29e3cffecaa4/1686023662.253265.jlb",
+      "features": ["R&D Spend", "Administration", "Marketing Spend", "State"],
+      "targets": ["Profit"],
+      "algo_type": "Multiple Linear Regressor",
+      "types_map": {
+        "R&D Spend": "float64",
+        "Administration": "float64",
+        "Marketing Spend": "float64",
+        "State": "object",
+        "Profit": "float64"
+      },
+      "project_id": "Project1-96507",
+      "train_accu": 0.942446542689397,
+      "test_accu": 0.9649618042060305,
+      "dataset": null,
+      "permanent_save": false,
+      "created_ts": "2023-06-06T03:54:22.255924",
+      "updated_ts": "2023-06-06T03:54:22.255929"
+    }
+  },
+  "gen_at": "2023-06-06T03:54:22.609745"
 }
 ```
 
