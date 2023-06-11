@@ -1,0 +1,110 @@
+---
+sidebar_position: 2
+---
+
+# Login
+
+Login to your account to generate JWT.
+
+<Tooltip color="#3abe25">Method: POST</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+https://engine.raccoon-ai.io/auth/login
+```
+
+## Request Body
+
+| Key      | Data Type | Required | Description                                        |
+| -------- | --------- | -------- | -------------------------------------------------- |
+| email    | string    | true     | Email of the user.                                 |
+| password | string    | true     | Password for the account. (More than 8 characters) |
+
+### Types
+
+```json
+{
+  "email": <string>,
+  "password": <string>
+}
+```
+
+### Sample
+
+```json
+{
+  "email": "user@raccoon-ai.io",
+  "password": "XXXXXXXX"
+}
+```
+
+## Reponse Body
+
+| Key     | Data Type | Description                                                                         |
+| ------- | --------- | ----------------------------------------------------------------------------------- |
+| success | boolean   | Indicate the success of the request                                                 |
+| msg     | string    | Message indicators                                                                  |
+| result  | json      | Result, only set if success is true. Contains information of the newly created user |
+| gen_at  | timestamp | Generated timestamp                                                                 |
+
+### Types
+
+```json
+{
+    "success": <bool>,
+    "msg": <string>,
+    "result": <json>,
+    "gen_at": <timestamp>
+}
+```
+
+### Sample
+
+```json
+{
+  "success": true,
+  "msg": "User logged in successfully",
+  "result": {
+    "jwt": "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX",
+    "user": {
+      "id": "585e2905-1316-45ca-bfd7-da9b4fbc7660",
+      "first_name": "Navindu",
+      "last_name": "Dananga",
+      "email": "navindu@raccoon-ai.io",
+      "is_super_admin": false,
+      "disabled": false,
+      "email_verified": false,
+      "tel_verified": false,
+      "tel": "+941234567",
+      "company": null,
+      "company_id_number": null,
+      "company_id_url": null,
+      "created_ts": "2023-06-11T22:12:46.996297",
+      "updated_ts": null,
+      "last_login_ts": null
+    },
+    "gen_ts": 1686502859.410083
+  }
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);

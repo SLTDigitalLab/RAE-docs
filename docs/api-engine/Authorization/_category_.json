@@ -1,0 +1,8 @@
+{
+  "label": "Authorization",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Authorization and Authentication for the Raccoon-ai Engine"
+  }
+}

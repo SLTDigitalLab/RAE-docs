@@ -1,0 +1,106 @@
+---
+sidebar_position: 1
+---
+
+# Generate Key
+
+Generate new API key to access Raccoon-AI engine.
+
+<Tooltip color="#3abe25">Method: POST</Tooltip> <Tooltip color="#Be2525">
+  Authorization: JWT
+</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+https://engine.raccoon-ai.io/auth/token/api/new
+```
+
+## Authorization
+
+| Type | Key           | Value             |
+| ---- | ------------- | ----------------- |
+| JWT  | Authorization | Bearer ########## |
+
+## Request Body
+
+| Key       | Data Type | Required | Description                                                 |
+| --------- | --------- | -------- | ----------------------------------------------------------- |
+| name      | string    | true     | Name for the new key                                        |
+| expire_in | int       | true     | Number of days that key will be valid (Maximum is 720 days) |
+
+### Types
+
+```json
+{
+  "name": <string>,
+  "expire_in": <int>
+}
+```
+
+### Sample
+
+```json
+{
+  "name": "MyKey",
+  "expire_in": 1
+}
+```
+
+## Reponse Body
+
+| Key        | Data Type | Description                                                   |
+| ---------- | --------- | ------------------------------------------------------------- |
+| success    | boolean   | Indicate the success of the request                           |
+| msg        | string    | Message indicators                                            |
+| error_code | int       | Error code information, only set if success is false          |
+| result     | json      | Result, only set if success is true. This containes X-Api-Key |
+| gen_at     | datetime  | Generated datetime                                            |
+
+### Types
+
+```json
+{
+  "success": <boolean>,
+  "msg": <string>,
+  "error_code": <int | null>,
+  "result": {
+    "X-Api-Key": <string>
+  },
+  "gen_at": <datetime>
+}
+```
+
+### Sample
+
+```json
+{
+  "success": true,
+  "msg": "API Key issued successfully",
+  "error_code": null,
+  "result": {
+    "X-Api-Key": "rae_######################"
+  },
+  "gen_at": "2023-06-11T22:05:26.135339"
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);

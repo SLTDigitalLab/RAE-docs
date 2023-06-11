@@ -1,0 +1,113 @@
+---
+sidebar_position: 1
+---
+
+# Register
+
+Create an account in Raccoon-AI engine. To requesting JWT, you must need to register.
+
+<Tooltip color="#3abe25">Method: POST</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+https://engine.raccoon-ai.io/auth/register
+```
+
+## Request Body
+
+| Key        | Data Type | Required | Description                                        |
+| ---------- | --------- | -------- | -------------------------------------------------- |
+| email      | string    | true     | Email of the user.                                 |
+| first_name | string    | true     | First name of the user.                            |
+| last_name  | string    | true     | Last name of the user.                             |
+| password   | string    | true     | Password for the account. (More than 8 characters) |
+| tel        | string    | false    | Mobile number of the user.                         |
+
+### Types
+
+```json
+{
+  "email": <string>,
+  "password": <string>,
+  "tel": <string | null>,
+  "first_name": <string>,
+  "last_name": <string>
+}
+```
+
+### Sample
+
+```json
+{
+  "email": "user@raccoon-ai.io",
+  "password": "XXXXXXXX",
+  "tel": "+941234567",
+  "first_name": "Navindu",
+  "last_name": "Dananga"
+}
+```
+
+## Reponse Body
+
+| Key     | Data Type | Description                                                                         |
+| ------- | --------- | ----------------------------------------------------------------------------------- |
+| success | boolean   | Indicate the success of the request                                                 |
+| msg     | string    | Message indicators                                                                  |
+| result  | json      | Result, only set if success is true. Contains information of the newly created user |
+
+### Types
+
+```json
+{
+    "success": <bool>,
+    "msg": <string>,
+    "result": <json>
+}
+```
+
+### Sample
+
+```json
+{
+  "success": true,
+  "msg": "User registered successfully",
+  "result": {
+    "id": "585e2905-1316-45ca-bfd7-da9b4fbc7660",
+    "first_name": "Navindu",
+    "last_name": "Dananga",
+    "email": "navindu@raccoon-ai.io",
+    "is_super_admin": false,
+    "disabled": false,
+    "email_verified": false,
+    "tel_verified": false,
+    "tel": "+941234567",
+    "company": null,
+    "company_id_number": null,
+    "company_id_url": null,
+    "created_ts": "2023-06-11T22:12:46.996297",
+    "updated_ts": null,
+    "last_login_ts": null
+  }
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);
