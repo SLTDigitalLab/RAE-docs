@@ -2,24 +2,26 @@
 sidebar_position: 1
 ---
 
-# Runner - 1
+# SKL Runner
 
-The runner is responsible for executing a trained AI model to make predictions or perform tasks. It takes input data, applies the model's knowledge, and generates the desired output.
+The SKL runner is responsible for executing a trained ML models (Regression & classification) to make predictions or perform tasks. It takes input data, applies the model's knowledge, and generates the desired output.
 
 <Tooltip color="#3abe25">Method: POST</Tooltip> <Tooltip color="#Be2525">
-  Authorization: JWT
+  Authorization: API Key
 </Tooltip>
 <div style={{ marginBottom: "20px" }}></div>
 
 ```bash
-https://engine.raccoon-ai.io/api/v1/runner/skl/<project_id>
+https://engine.raccoon-ai.io/api/v1/runner/skl/<permanent_model_id>
 ```
+
+**Important:** To use SKL runner, first you need to make train model with `trainer` and make that `cached model` to <a href="/docs/api-engine/Explorer/ML/Cached/make_permanent">`permanent model`</a>.
 
 ## Authorization
 
-| Type | Key           | Value             |
-| ---- | ------------- | ----------------- |
-| JWT  | Authorization | Bearer ########## |
+| Type    | Key       | Value           |
+| ------- | --------- | --------------- |
+| API Key | X-Api-Key | rae\_########## |
 
 ## Request Body
 
@@ -45,41 +47,40 @@ https://engine.raccoon-ai.io/api/v1/runner/skl/<project_id>
 
 ```json
 {
-    "data": {
-        "R&D Spend": {
-            "0": 165349.2,
-            "1": 162597.7,
-            "2": 153441.51,
-            "3": 144372.41,
-            "4": 142107.34
-        },
-        "Administration": {
-            "0": 136897.8,
-            "1": 151377.59,
-            "2": 101145.55,
-            "3": 118671.85,
-            "4": 91391.77
-        },
-        "Marketing Spend": {
-            "0": 471784.1,
-            "1": 443898.53,
-            "2": 407934.54,
-            "3": 383199.62,
-            "4": 366168.42
-        },
-        "State": {
-            "0": "New York",
-            "1": "California",
-            "2": "Florida",
-            "3": "New York",
-            "4": "Florida"
-        }
+  "data": {
+    "R&D Spend": {
+      "0": 165349.2,
+      "1": 162597.7,
+      "2": 153441.51,
+      "3": 144372.41,
+      "4": 142107.34
     },
-    "config": {
-        "include_inputs": true
+    "Administration": {
+      "0": 136897.8,
+      "1": 151377.59,
+      "2": 101145.55,
+      "3": 118671.85,
+      "4": 91391.77
+    },
+    "Marketing Spend": {
+      "0": 471784.1,
+      "1": 443898.53,
+      "2": 407934.54,
+      "3": 383199.62,
+      "4": 366168.42
+    },
+    "State": {
+      "0": "New York",
+      "1": "California",
+      "2": "Florida",
+      "3": "New York",
+      "4": "Florida"
     }
+  },
+  "config": {
+    "include_inputs": true
+  }
 }
-
 ```
 
 ## Reponse Body
