@@ -42,8 +42,10 @@ https://engine.raccoon-ai.io/api/v1/ml/regression/mlr
         "targets" : <list>,
         "config"  : {
                 "std_scale": <boolean>,
-                "encoder"  : <"onehot" | "label" | "drop">
-            }
+                "encoder"  : <"onehot" | "label" | "drop">,
+                "val_size" : <float>
+            },
+        "hyper_params": <json>
     },
     "predict": {
         "data": <json_data>,
@@ -54,6 +56,15 @@ https://engine.raccoon-ai.io/api/v1/ml/regression/mlr
     }
 }
 ```
+
+### Hyper Parameters
+
+| Parameter     | Type | Default | Description                                                                                                                                                                                                                 |
+| ------------- | ---- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| fit_intercept | bool | true    | Whether to calculate the intercept for this model. If set to False, no intercept will be used in calculations (i.e. data is expected to be centered).                                                                       |
+| copy_X        | bool | true    | If True, X will be copied; else, it may be overwritten.                                                                                                                                                                     |
+| n_jobs        | int  | null    | The number of jobs to use for the computation. This will only provide speedup in case of sufficiently large problems, that is if firstly n_targets > 1 and secondly X is sparse or if positive is set to True. None means 1 |
+| positive      | bool | false   | When set to True, forces the coefficients to be positive. This option is only supported for dense arrays.                                                                                                                   |
 
 ### Sample
 
@@ -177,7 +188,7 @@ https://engine.raccoon-ai.io/api/v1/ml/regression/mlr
     "result": <json>,
     "score": {
         "train": <float>,
-        "test": <float>
+        "validation": <float>
     },
     "generated_ts": <timestamp>
 }
@@ -214,7 +225,7 @@ https://engine.raccoon-ai.io/api/v1/ml/regression/mlr
   },
   "score": {
     "train": 0.942446542689397,
-    "test": 0.9649618042060305
+    "validation": 0.9649618042060305
   },
   "saved_in": null,
   "generated_ts": 1685439220.425382
