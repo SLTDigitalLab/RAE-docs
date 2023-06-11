@@ -1,0 +1,8 @@
+{
+  "label": "Runner",
+  "position": 5,
+  "link": {
+    "type": "generated-index",
+    "description": "In the context of AI modules, a runner is responsible for executing a trained AI model to make predictions or perform tasks. It takes input data, applies the model's knowledge, and generates the desired output. The runner handles hardware execution, pre-processing, and post-processing steps. It enables the deployment and utilization of AI models in real-world applications."
+  }
+}

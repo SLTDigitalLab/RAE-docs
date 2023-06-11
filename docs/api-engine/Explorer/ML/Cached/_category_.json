@@ -1,0 +1,8 @@
+{
+  "label": "Cached",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "The trainer is responsible for training the model by adjusting its parameters based on a dataset"
+  }
+}

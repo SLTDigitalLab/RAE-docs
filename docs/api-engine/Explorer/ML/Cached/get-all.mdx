@@ -1,0 +1,127 @@
+---
+sidebar_position: 1
+---
+
+# Explorer
+
+This is the process of checking all details.
+
+<Tooltip color="#3abe25">Method: GET</Tooltip> <Tooltip color="#Be2525">
+  Authorization: NO
+</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+https://engine.raccoon-ai.io/api/v1/explore/ml/cached/get-all
+```
+
+## Reponse Body
+
+| Key            | Data Type | Description                                 |
+| -------------- | --------- | ------------------------------------------- |
+| id             | string    | Project identification number               |
+| user_id        | string    | User identification number                  |
+| model_path     | string    | Saved path for the model                    |
+| features       | list      | Set of features                             |
+| targets        | list      | Set of targets                              |
+| algo_type      | string    | Algorithem type                             |
+| types_map      | json      | Types of the features selected              |
+| project_id     | string    | Unique project identiication number         |
+| train_accu     | float     | Accuracy of the trained model (between 0-1) |
+| dataset        | json      | The prediction dataset                      |
+| permanent_save | bool      | Indiacating whether permently saved or not  |
+| created_ts     | datetime  | Created time of the project                 |
+| updated_ts     | datetime  | If updated, updated time of the project     |
+| hyper_params   | json      | The hyper parameters used for the model     |
+| gen_at         | datetime  | The time of this request made               |
+
+### Types
+
+```json
+{
+    {
+  "id": <string>,
+  "user_id": <string>,
+  "model_path":<string>,
+  "features": <list>,
+  "targets": <list>,
+  "algo_type": <string>,
+  "types_map": <json>,
+  "project_id": <string>,
+  "train_accu": <float>,
+  "test_accu": <float>,
+  "dataset": <string>,
+  "permanent_save": <bool>,
+  "created_ts": <datatime>,
+  "updated_ts": <datatime>,
+  "hyper_params": <json>
+    },
+    "gen_at": <datetime>
+}
+
+```
+
+### Sample
+
+```json
+{
+    "success": true,
+    "msg": "Model fetched",
+    "error_code": null,
+    "result": [
+        {
+            "id": "e792ae43-9055-40ae-8e91-70080b6e99f0",
+            "user_id": "7f7c0c39-0930-43f2-81a3-29e3cffecaa4",
+            "model_path": "/home/navi/CODE/Raccoon-AI-Engine/app/storage/cached_ml/7f7c0c39-0930-43f2-81a3-29e3cffecaa4/models/e792ae43-9055-40ae-8e91-70080b6e99f0.jlb",
+            "features": [
+                "R&D Spend",
+                "Administration",
+                "Marketing Spend",
+                "State"
+            ],
+            "targets": [
+                "Profit"
+            ],
+            "algo_type": "Multiple Linear Regressor",
+            "types_map": {
+                "R&D Spend": "float64",
+                "Administration": "float64",
+                "Marketing Spend": "float64",
+                "State": "object",
+                "Profit": "float64"
+            },
+            "project_id": "Project1-96507",
+            "train_accu": 0.9424153873982086,
+            "test_accu": 0.9649827631091707,
+            "dataset": null,
+            "permanent_save": false,
+            "created_ts": "2023-03-16T15:17:03.479329",
+            "updated_ts": "2023-03-16T15:17:03.479333",
+            "hyper_params": null
+        },
+        ...
+    ],
+    "gen_at": "2023-06-08T07:21:50.963629"
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);
