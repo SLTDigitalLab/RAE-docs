@@ -1,0 +1,178 @@
+---
+sidebar_position: 1
+---
+
+# Make Permanent
+
+To use <a>`runner`</a> trained model need to be saved permanently. Use this endpoint to make cached models permanent.
+
+<Tooltip color="#3abe25">Method: POST</Tooltip> <Tooltip color="#Be2525">
+  Authorization: API Key
+</Tooltip>
+<div style={{ marginBottom: "20px" }}></div>
+
+```bash
+https://engine.raccoon-ai.io/api/v1/trainer/ml/permanent/<cached_model_id>
+```
+
+**Important:** `<cached_model_id>` will be available after you trained the model with trainer. Refer <a href="/docs/category/trainer">`trainer`</a> to find `<cached_model_id>`.
+
+## Authorization
+
+| Type    | Key       | Value           |
+| ------- | --------- | --------------- |
+| API Key | X-Api-Key | rae\_########## |
+
+## Request Body
+
+| Key        | Data Type | Required | Description                                                              |
+| ---------- | --------- | -------- | ------------------------------------------------------------------------ |
+| model_name | string    | true     | Name for the trained model                                               |
+| short_desc | string    | true     | Short description to explain about the model                             |
+| long_desc  | string    | true     | Long description to explain deeply about model (Supports Markdown (MD)). |
+
+### Types
+
+```json
+{
+  "model_name": <string>,
+  "short_desc": <sting>,
+  "long_desc": <string>
+}
+```
+
+### Sample
+
+```json
+{
+  "data": {
+    "R&D Spend": {
+      "0": 165349.2,
+      "1": 162597.7,
+      "2": 153441.51,
+      "3": 144372.41,
+      "4": 142107.34
+    },
+    "Administration": {
+      "0": 136897.8,
+      "1": 151377.59,
+      "2": 101145.55,
+      "3": 118671.85,
+      "4": 91391.77
+    },
+    "Marketing Spend": {
+      "0": 471784.1,
+      "1": 443898.53,
+      "2": 407934.54,
+      "3": 383199.62,
+      "4": 366168.42
+    },
+    "State": {
+      "0": "New York",
+      "1": "California",
+      "2": "Florida",
+      "3": "New York",
+      "4": "Florida"
+    }
+  },
+  "config": {
+    "include_inputs": true
+  }
+}
+```
+
+## Reponse Body
+
+| Key        | Data Type | Description                                          |
+| ---------- | --------- | ---------------------------------------------------- |
+| success    | boolean   | Indicate the success of the request                  |
+| msg        | string    | Message indicators                                   |
+| error_code | int       | Error code information, only set if success is false |
+| result     | json      | Result, only set if success is true                  |
+| gen_at     | datetime  | Generated datetime                                   |
+
+### Types
+
+```json
+{
+    "success": <bool>,
+    "msg": <string>,
+    "error": <null> or <string>,
+    "result": <json>,
+    "score": <json>,
+    "generated_ts": <timestamp>
+}
+```
+
+### Sample
+
+```json
+{
+  "success": true,
+  "msg": "Runner predicted successfully",
+  "error": null,
+  "result": {
+    "R&D Spend": {
+      "0": 165349.2,
+      "1": 162597.7,
+      "2": 153441.51,
+      "3": 144372.41,
+      "4": 142107.34
+    },
+    "Administration": {
+      "0": 136897.8,
+      "1": 151377.59,
+      "2": 101145.55,
+      "3": 118671.85,
+      "4": 91391.77
+    },
+    "Marketing Spend": {
+      "0": 471784.1,
+      "1": 443898.53,
+      "2": 407934.54,
+      "3": 383199.62,
+      "4": 366168.42
+    },
+    "State": {
+      "0": "New York",
+      "1": "California",
+      "2": "Florida",
+      "3": "New York",
+      "4": "Florida"
+    },
+    "Profit": {
+      "0": 190209.72,
+      "1": 186863.18,
+      "2": 179790.26,
+      "3": 171576.92,
+      "4": 169898.04
+    }
+  },
+  "score": {
+    "train": 0.942446542689397,
+    "test": 0.9649618042060305
+  },
+  "generated_ts": 1686130100.870728
+}
+```
+
+export const Tooltip = ({ children, color }) => (
+  <span
+    style={{
+      backgroundColor: color,
+      borderRadius: "20px",
+      color: "#fff",
+      padding: "7px",
+      cursor: "pointer",
+      fontWeight: "750",
+      fontSize: "15px",
+      position: "relative",
+      bottom: "4px",
+    }}
+    onClick={() => {
+      alert(`You clicked the color ${color} with label ${children}`);
+    }}
+  >
+    {children}
+  </span>
+);
