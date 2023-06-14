@@ -45,39 +45,9 @@ https://engine.raccoon-ai.io/api/v1/trainer/ml/permanent/<cached_model_id>
 
 ```json
 {
-  "data": {
-    "R&D Spend": {
-      "0": 165349.2,
-      "1": 162597.7,
-      "2": 153441.51,
-      "3": 144372.41,
-      "4": 142107.34
-    },
-    "Administration": {
-      "0": 136897.8,
-      "1": 151377.59,
-      "2": 101145.55,
-      "3": 118671.85,
-      "4": 91391.77
-    },
-    "Marketing Spend": {
-      "0": 471784.1,
-      "1": 443898.53,
-      "2": 407934.54,
-      "3": 383199.62,
-      "4": 366168.42
-    },
-    "State": {
-      "0": "New York",
-      "1": "California",
-      "2": "Florida",
-      "3": "New York",
-      "4": "Florida"
-    }
-  },
-  "config": {
-    "include_inputs": true
-  }
+  "model_name": "My Model",
+  "short_desc": "This is my model short description",
+  "long_desc": "This is my model long description. This support **MARKDOWN**"
 }
 ```
 
@@ -107,53 +77,7 @@ https://engine.raccoon-ai.io/api/v1/trainer/ml/permanent/<cached_model_id>
 ### Sample
 
 ```json
-{
-  "success": true,
-  "msg": "Runner predicted successfully",
-  "error": null,
-  "result": {
-    "R&D Spend": {
-      "0": 165349.2,
-      "1": 162597.7,
-      "2": 153441.51,
-      "3": 144372.41,
-      "4": 142107.34
-    },
-    "Administration": {
-      "0": 136897.8,
-      "1": 151377.59,
-      "2": 101145.55,
-      "3": 118671.85,
-      "4": 91391.77
-    },
-    "Marketing Spend": {
-      "0": 471784.1,
-      "1": 443898.53,
-      "2": 407934.54,
-      "3": 383199.62,
-      "4": 366168.42
-    },
-    "State": {
-      "0": "New York",
-      "1": "California",
-      "2": "Florida",
-      "3": "New York",
-      "4": "Florida"
-    },
-    "Profit": {
-      "0": 190209.72,
-      "1": 186863.18,
-      "2": 179790.26,
-      "3": 171576.92,
-      "4": 169898.04
-    }
-  },
-  "score": {
-    "train": 0.942446542689397,
-    "test": 0.9649618042060305
-  },
-  "generated_ts": 1686130100.870728
-}
+
 ```
 
 export const Tooltip = ({ children, color }) => (
